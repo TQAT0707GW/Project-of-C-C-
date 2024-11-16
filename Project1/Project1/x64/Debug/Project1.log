@@ -1,0 +1,12 @@
+﻿  Source.cpp
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(98,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(139,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(661,21): warning C4129: 'C': unrecognized character escape sequence
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(492,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(509,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(534,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(648,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(655,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(698,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\Project1\Source.cpp(727,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Project1.vcxproj -> T:\User-T\Nam_3_DTVT4\HK2-23-24\Th_LTOOP\Do_an\Project1\x64\Debug\Project1.exe
