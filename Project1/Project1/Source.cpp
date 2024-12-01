@@ -307,6 +307,7 @@ public:
         for (int j = 0; j < hh.size(); j++)
             delete hh[j];
     }
+    //print khachhang
     void xuatkhachhang()
     {
         cout << "TEN KHACH HANG" << setw(15);
@@ -317,6 +318,7 @@ public:
         for (int i = 0; i < kh.size(); i++)
             kh[i]->xuat();
     }
+    //read data from excel file of hanghoa
     void docfilehanghoa()
     {
         hh.resize(k + h);
@@ -475,10 +477,10 @@ public:
                 {
                     if (hh[i]->get_MAHANG() == msp)
                     {
-                        if (hh[i]->getloai() == "THUCPHAM")
+                        if (hh[i]->getloai() == "THUCPHAM")//if mechandise is thucpham 
                         {
-                            cout << "\nNhap so ky: "; cin >> sl;
-                            if (hh[i]->get_soluong() < sl)
+                            cout << "\nNhap so ky: "; cin >> sl;//enter a weight
+                            if (hh[i]->get_soluong() < sl)// if more than quantity in warehouse
                             {
                                 cout << "\nKhong du so luong\n";
                                 break;
@@ -486,10 +488,10 @@ public:
                             else
                             {
                                 HANGHOA* x = new THUCPHAM;
-                                x->set_thongtin1sp(msp, hh[i]->get_tenhang(), "THUCPHAM", hh[i]->get_giatien());
+                                x->set_thongtin1sp(msp, hh[i]->get_tenhang(), "THUCPHAM", hh[i]->get_giatien());//add a merchandise to basket
                                 x->setsoluong(sl);
                                 giohang.push_back(x);
-                                hh[i]->setsoluong(hh[i]->get_soluong() - sl);
+                                hh[i]->setsoluong(hh[i]->get_soluong() - sl);//set again quantity after buying
                             }
                         }
                         else
@@ -513,6 +515,9 @@ public:
                 }
             }
             else break;}}
+    /// <summary>
+    /// modify a basket after chose 
+    /// </summary>
     void CHINHSUAGIOHANG()
     {
         xuatGIOHANG();
@@ -521,6 +526,7 @@ public:
             int msp;
             cout << "\nNhap 0 de thoat\n";
             cout << "Nhap ma sp(3 so): "; cin >> msp;
+            //In this section, we only can delete a one mechandise from basket
             if (msp != 0)
             {
                 for (int i = 0; i < giohang.size(); i++)
@@ -543,6 +549,7 @@ public:
                 break;
         }
     }
+    //function to print basket
     void xuatGIOHANG()
     {
         cout << "MA HANG" << setw(15);
@@ -554,18 +561,20 @@ public:
         for (int i = 0; i < giohang.size(); i++)
             giohang[i]->xuat();
     }
+    //paying
     void tinhtien()
     {
         xuatGIOHANG();
         float sum = 0;
         for (int i = 0; i < giohang.size(); i++)
         {
-            sum += giohang[i]->tinhtien();
+            sum += giohang[i]->tinhtien();//sum 
         }
         cout << "\nTong tien la: " << sum << endl;
         string sdt; char c;
+        //enter a number. If not exist, a new customer. We add a phone number of new customer to excel file "KhachHang"
         do {
-            cout << "\nNhap so dien thoai: "; cin >> sdt;
+            cout << "\nNhap so dien thoai: "; cin >> sdt; //confirm a number
             cout << "\nXac nhan so dien thoai la dung(y/n): "; cin >> c;
         } while (c != 'y');
         for (int i = 0; i < kh.size(); i++)
@@ -574,19 +583,19 @@ public:
             {
                 if (kh[i]->get_loaiKH() == "DIEM")
                 {
-                    cout << "\nHien tai ban dang co so diem la: " << kh[i]->get_sodiem() << "\n";
-                    cout << "Ban co muon su dung diem khong(y/n): "; cin >> c;
+                    cout << "\nHien tai ban dang co so diem la: " << kh[i]->get_sodiem() << "\n";//print the exist point
+                    cout << "Ban co muon su dung diem khong(y/n): "; cin >> c;//Do you want to use a point
                     if (c == 'y')
                     {
                         if (sum > kh[i]->get_sodiem())
                         {
-                            sum = sum - kh[i]->get_sodiem();
+                            sum = sum - kh[i]->get_sodiem();//subtract a point and set a point
                             kh[i]->set_sodiem(0);
                             tongtien = sum;
                             cout << "\nSo diem moi cua ban la: " << kh[i]->get_sodiem() << "\n";
                             return;
                         }
-                        else
+                        else //if not use point, customers will paying a cash
                         {
                             kh[i]->set_sodiem(kh[i]->get_sodiem()-sum);
                             sum = 0;
@@ -603,7 +612,7 @@ public:
                         return;
                     }
                 }
-                else
+                else//customer is using a credit card discounted a 15% 
                 {
                     cout << "\nBan dang co the voi ma the la: " << kh[i]->get_mathe() << "\n";
                     cout<<"Ban co mang theo the khong(y/n): "; cin >> c;
@@ -621,25 +630,26 @@ public:
                 }
             }
         }
-        cout << "\nKhong tim thay khach hang!Vui long dang ky diem!\n";
+        cout << "\nKhong tim thay khach hang!Vui long dang ky diem!\n";//if not a exist customer
         KHACHHANG* x = NULL;
-        x = new THANHTOANDIEM;
+        x = new THANHTOANDIEM;//automically paying a point
         x->set_sodiem(sum * 5 / 100);
         x->set_loai("DIEM");
         string ten;
-        cout << "\nNhap ho ten: "; cin.ignore(); getline(cin, ten);
+        cout << "\nNhap ho ten: "; cin.ignore(); getline(cin, ten);//set information of customer
         cout << "\nSo diem moi cua ban la: " << x->get_sodiem();
         x->set_sdt(sdt);
         x->set_ten(ten);
         kh.push_back(x);
         tongtien = sum;
     }
+    //print a bill
     void inhoadon()
     {
         if (!giohang.empty())
         {
             tinhtien();
-            for (int i = 0; i < giohang.size(); i++)
+            for (int i = 0; i < giohang.size(); i++)//read data from a basket and store in ls
             {
                 if (giohang[i]->getloai() == "THUCPHAM")
                 {
@@ -676,6 +686,7 @@ public:
         else
             cout << "\nGio hang trong!\n";
     }
+    //print a history of bill
     void lichsuhoadon()
     {
         if (!ls.empty()) {
@@ -685,7 +696,7 @@ public:
         else
             cout << "\nLich su hang trong!\n";
     }
-    void tinhtongtientrongngay()
+    void tinhtongtientrongngay()//sum of the day
     {
         float sum = 0;
         for (int i = 0; i < ls.size(); i++)
@@ -693,7 +704,7 @@ public:
         lichsuhoadon();
         cout << "\nTong tien :" << sum << endl;
     }
-    void xoalichsuhoadontrongngay()
+    void xoalichsuhoadontrongngay()//delete a history after print data into excel file
     {
         int t = ls.size();
         for (int i = 0; i < t; i++)
